@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أسئلة الاختبار - جد ولعب</title>
+    <link rel="stylesheet" href="test-questions.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-btn" onclick="window.location.href='tests_complete.html'">← رجوع </div>
+            
+            <div class="page-title">أسئلة الاختبار</div>
+            <div class="timer">⏱️ <span id="timer">30:00</span></div>
+        </div>
+        
+        <div class="content">
+            <div class="test-info">
+                <div id="testSubject"></div>
+                <div id="testLesson"></div>
+                <div id="testProgress">السؤال <span id="currentQuestion">1</span> من <span id="totalQuestions">0</span></div>
+            </div>
+            
+            <div class="questions-container" id="questionsContainer">
+                <!-- الأسئلة تظهر هنا -->
+            </div>
+            
+            <div class="test-controls">
+                <button class="control-btn" onclick="previousQuestion()" id="prevBtn" disabled>السابق</button>
+                <button class="control-btn" onclick="nextQuestion()" id="nextBtn">التالي</button>
+                <button class="submit-btn" onclick="submitTest()" id="submitBtn" style="display: none;">تسليم الاختبار</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="test-questions.js"></script>
+</body>
+</html>

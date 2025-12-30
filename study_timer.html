@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مؤقت المذاكرة - جد ولعب</title>
+    <link rel="stylesheet" href="study_timer.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-btn" onclick="goBack()">← رجوع</div>
+            <div class="logo">جد ولعب</div>
+            <div class="page-title">مؤقت المذاكرة</div>
+        </div>
+        
+        <div class="content">
+            <div class="timer-section">
+                <div class="timer-display" id="timerDisplay">00:00:00</div>
+                
+                <div class="timer-controls">
+                    <button class="control-btn" id="startBtn" onclick="startTimer()">▶ ابدأ</button>
+                    <button class="control-btn pause" id="pauseBtn" onclick="pauseTimer()" disabled>⏸ إيقاف</button>
+                    <button class="control-btn reset" onclick="resetTimer()">🔄 إعادة</button>
+                </div>
+            </div>
+            
+            <div class="duration-section">
+                <div class="section-title">⏰ اختيار المدة</div>
+                <div class="duration-options">
+                    <div class="duration-option active" data-minutes="25">25 دقيقة</div>
+                    <div class="duration-option" data-minutes="45">45 دقيقة</div>
+                    <div class="duration-option" data-minutes="60">60 دقيقة</div>
+                    <div class="duration-option" data-minutes="90">90 دقيقة</div>
+                    <div class="duration-option custom" onclick="showCustomInput()">مخصص</div>
+                </div>
+                
+                <div class="custom-input" id="customInput" style="display: none;">
+                    <input type="number" id="customMinutes" placeholder="عدد الدقائق" min="1" max="180">
+                    <button onclick="setCustomDuration()">تأكيد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="points_system.js"></script>
+    <script src="study_timer.js"></script>
+</body>
+</html>

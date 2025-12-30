@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    direction: rtl;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* الهيدر */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.back-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.timer {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* المحتوى */
+.content {
+    padding: 30px;
+}
+
+/* معلومات الاختبار */
+.test-info {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#testSubject {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#testLesson {
+    font-size: 18px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+#testProgress {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* الأسئلة */
+.questions-container {
+    margin-bottom: 30px;
+}
+
+.question {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border: 2px solid #f8f9fa;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.question.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.question-number {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+}
+
+.question-text {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    color: #2d3748;
+    text-align: right;
+}
+
+/* الخيارات */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    background: #f8f9fa;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.option::before {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    bottom: -2px;
+    width: 5px;
+    background: #667eea;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.option:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+    transform: translateX(-5px);
+}
+
+.option:hover::before {
+    opacity: 1;
+}
+
+.option.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateX(-5px);
+}
+
+.option.selected::before {
+    opacity: 1;
+}
+
+.option input {
+    margin-left: 15px;
+    transform: scale(1.3);
+    accent-color: #667eea;
+}
+
+.option label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* أزرار التحكم */
+.test-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.control-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.control-btn:not(:disabled):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0,0,0,0.15);
+}
+
+#prevBtn {
+    background: #718096;
+    color: white;
+}
+
+#prevBtn:hover:not(:disabled) {
+    background: #4a5568;
+}
+
+#nextBtn {
+    background: #667eea;
+    color: white;
+}
+
+#nextBtn:hover:not(:disabled) {
+    background: #5a67d8;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+    box-shadow: 0 7px 20px rgba(72, 187, 120, 0.3);
+}
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        border-radius: 15px;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .question {
+        padding: 20px;
+    }
+    
+    .question-text {
+        font-size: 18px;
+    }
+    
+    .test-controls {
+        flex-direction: column;
+    }
+    
+    .header {
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .logo {
+        position: static;
+        transform: none;
+        order: -1;
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .option {
+        padding: 15px;
+    }
+    
+    .option label {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .question-text {
+        font-size: 16px;
+    }
+    
+    .option label {
+        font-size: 15px;
+    }
+    
+    .control-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}

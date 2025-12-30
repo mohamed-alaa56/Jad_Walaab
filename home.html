@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة جد ولعب</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">جد ولعب</div>
+        </div>
+        
+        <div class="content">
+            <!-- قسم الترحيب -->
+            <div class="welcome-section" id="welcomeSection">
+                <!-- سيتم تعبئته بالجافاسكريبت -->
+            </div>
+
+            <!-- زر تغيير المرحلة -->
+            <div class="change-grade-btn" style="display: none;" id="changeGradeBtn">
+                <button onclick="changeGrade()">🔄 تغيير المرحلة الدراسية</button>
+            </div>
+
+            <!-- اختيار المرحلة الدراسية -->
+            <div class="grade-section" id="gradeSection">
+                <div class="section-title">📚 اختر مرحلتك الدراسية</div>
+                <div class="grade-options">
+                    <div class="grade-option" data-grade="3-prep" onclick="selectGrade('3-prep')">
+                        <div class="grade-icon">🔬</div>
+                        <div class="grade-info">
+                            <div class="grade-name">الصف الثالث الإعدادي</div>
+                            <div class="grade-desc">جميع الخيارات متاحة</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grade-option" data-grade="other" onclick="showOtherGrades()">
+                        <div class="grade-icon">📖</div>
+                        <div class="grade-info">
+                            <div class="grade-name">مراحل أخرى</div>
+                            <div class="grade-desc">المذاكرة والترتيب فقط</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قائمة المراحل الأخرى (مخفية في الأول) -->
+                <div class="other-grades" id="otherGrades" style="display: none; margin-top: 20px;">
+                    <div class="section-title">🎒 اختر صفك</div>
+                    <div class="other-grades-list">
+                        <div class="other-grade-option" onclick="selectOtherGrade('4-primary')">
+                            الصف الرابع الابتدائي
+                        </div>
+                        <div class="other-grade-option" onclick="selectOtherGrade('5-primary')">
+                            الصف الخامس الابتدائي
+                        </div>
+                        <div class="other-grade-option" onclick="selectOtherGrade('6-primary')">
+                            الصف السادس الابتدائي
+                        </div>
+                        <div class="other-grade-option" onclick="selectOtherGrade('1-prep')">
+                            الصف الأول الإعدادي
+                        </div>
+                        <div class="other-grade-option" onclick="selectOtherGrade('2-prep')">
+                            الصف الثاني الإعدادي
+                        </div>
+                        <div class="other-grade-option" onclick="selectOtherGrade('1-secondary')">
+                            الصف الأول الثانوي
+                        </div>
+                        <div class="other-grade-option" onclick="selectOtherGrade('2-secondary')">
+                            الصف الثاني الثانوي
+                        </div>
+                        <div class="other-grade-option" onclick="selectOtherGrade('3-secondary')">
+                            الصف الثالث الثانوي
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الخيارات (ستظهر بعد اختيار المرحلة) -->
+            <div class="options" id="mainOptions" style="display: none;">
+                <div class="option pulse" onclick="handleOptionClick('study')">
+                    <div class="option-icon">📚</div>
+                    <div class="option-text">
+                        <div class="option-title">إبدأ المذاكرة</div>
+                        <div class="option-desc">استخدم مؤقت المذاكرة</div>
+                    </div>
+                </div>
+                
+                <div class="option" id="gamesOption" onclick="openGamesPage()">
+                    <div class="option-icon">🎮</div>
+                    <div class="option-text">
+                        <div class="option-title">الألعاب</div>
+                        <div class="option-desc">تعلم من خلال الألعاب</div>
+                    </div>
+                </div>
+                
+               <div class="option" id="lessonsOption" onclick="openLessonsPage()">
+                    <div class="option-icon">📖</div>
+                    <div class="option-text">
+                        <div class="option-title">الدروس</div>
+                        <div class="option-desc">الوصول إلى الدروس التعليمية</div>
+                    </div>
+                </div>
+
+                <div class="option" id="testsOption" onclick="handleOptionClick('tests')">
+                    <div class="option-icon">🧪</div>
+                    <div class="option-text">
+                        <div class="option-title">الاختبارات</div>
+                        <div class="option-desc">اختبارات تفاعلية في جميع المواد</div>
+                    </div>
+                </div>
+                
+                <div class="option" onclick="handleOptionClick('ranking')">
+                    <div class="option-icon">🏆</div>
+                    <div class="option-text">
+                        <div class="option-title">الترتيب</div>
+                        <div class="option-desc">شاهد ترتيبك</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="points_system.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>

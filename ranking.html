@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الترتيب - جد ولعب</title>
+    <link rel="stylesheet" href="ranking.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-btn" onclick="goBack()">← رجوع</div>
+            <div class="logo">جد ولعب</div>
+            <div class="page-title">لوحة الترتيب</div>
+        </div>
+        
+        <div class="content">
+            <!-- الميداليات -->
+            <div class="medals-section">
+                <div class="medal gold">
+                    <div class="medal-icon">🥇</div>
+                    <div class="medal-info">
+                        <div class="medal-title">المركز الأول</div>
+                        <div id="firstPlace" class="medal-user">-</div>
+                    </div>
+                </div>
+                
+                <div class="medal silver">
+                    <div class="medal-icon">🥈</div>
+                    <div class="medal-info">
+                        <div class="medal-title">المركز الثاني</div>
+                        <div id="secondPlace" class="medal-user">-</div>
+                    </div>
+                </div>
+                
+                <div class="medal bronze">
+                    <div class="medal-icon">🥉</div>
+                    <div class="medal-info">
+                        <div class="medal-title">المركز الثالث</div>
+                        <div id="thirdPlace" class="medal-user">-</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قائمة جميع المستخدمين -->
+            <div class="ranking-list">
+                <div class="section-title">📊 جميع اللاعبين</div>
+                <div id="rankingList" class="users-list">
+                    <!-- سيتم تعبئتها بالجافاسكريبت -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="ranking.js"></script>
+</body>
+</html>

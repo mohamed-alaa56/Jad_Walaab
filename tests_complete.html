@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاختبارات - جد ولعب</title>
+    <link rel="stylesheet" href="tests_complete.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-btn" onclick="goBack()">← رجوع</div>
+            <div class="logo">جد ولعب</div>
+            <div class="page-title">الاختبارات</div>
+        </div>
+        
+        <div class="content">
+            <!-- خطوات الاختبار -->
+            <div class="test-steps">
+                <div class="step active" id="step1">
+                    <div class="step-number">1</div>
+                    <div class="step-title">اختيار المادة</div>
+                </div>
+                <div class="step" id="step2">
+                    <div class="step-number">2</div>
+                    <div class="step-title">اختيار الوحدة</div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="step-number">3</div>
+                    <div class="step-title">اختيار الدرس</div>
+                </div>
+                <div class="step" id="step4">
+                    <div class="step-number">4</div>
+                    <div class="step-title">عدد الأسئلة</div>
+                </div>
+                <div class="step" id="step5">
+                    <div class="step-number">5</div>
+                    <div class="step-title">بدء الاختبار</div>
+                </div>
+            </div>
+
+            <!-- الخطوة 1: اختيار المادة -->
+            <div class="step-content active" id="step1Content">
+                <div class="section-title">📚 اختر المادة الدراسية</div>
+                <div class="subjects-grid" id="subjectsGrid">
+                    <!-- سيتم تعبئته بالجافاسكريبت -->
+                </div>
+            </div>
+
+            <!-- الخطوة 2: اختيار الوحدة -->
+            <div class="step-content" id="step2Content">
+                <div class="section-title" id="step2Title">📖 اختر الوحدة</div>
+                <div class="units-list" id="unitsList">
+                    <!-- سيتم تعبئته بالجافاسكريبت -->
+                </div>
+            </div>
+
+            <!-- الخطوة 3: اختيار الدرس -->
+            <div class="step-content" id="step3Content">
+                <div class="section-title">📝 اختر الدرس</div>
+                <div class="lessons-list" id="lessonsList">
+                    <!-- سيتم تعبئته بالجافاسكريبت -->
+                </div>
+            </div>
+
+            <!-- الخطوة 4: اختيار عدد الأسئلة -->
+            <div class="step-content" id="step4Content">
+                <div class="section-title">🔢 اختر عدد الأسئلة</div>
+                <div class="questions-options">
+                    <div class="questions-option" onclick="selectQuestionsCount(10)">
+                        <div class="questions-count">10</div>
+                        <div class="questions-info">
+                            <div class="questions-title">10 أسئلة</div>
+                            <div class="questions-points">+20 نقطة للنجاح</div>
+                        </div>
+                    </div>
+                    <div class="questions-option" onclick="selectQuestionsCount(20)">
+                        <div class="questions-count">20</div>
+                        <div class="questions-info">
+                            <div class="questions-title">20 سؤال</div>
+                            <div class="questions-points">+40 نقطة للنجاح</div>
+                        </div>
+                    </div>
+                    <div class="questions-option" onclick="selectQuestionsCount(30)">
+                        <div class="questions-count">30</div>
+                        <div class="questions-info">
+                            <div class="questions-title">30 سؤال</div>
+                            <div class="questions-points">+60 نقطة للنجاح</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الخطوة 5: بدء الاختبار -->
+            <div class="step-content" id="step5Content">
+                <div class="test-summary">
+                    <div class="summary-title">ملخص الاختبار</div>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span class="summary-label">المادة:</span>
+                            <span id="summarySubject">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">الوحدة:</span>
+                            <span id="summaryUnit">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">الدرس:</span>
+                            <span id="summaryLesson">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">عدد الأسئلة:</span>
+                            <span id="summaryQuestions">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">النقاط المحتملة:</span>
+                            <span id="summaryPoints">-</span>
+                        </div>
+                    </div>
+                    <button class="start-test-btn" onclick="startAITest()">بدء الاختبار</button>
+                    
+                    <!-- تحميل -->
+                    <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+                        <div style="color: #667eea; font-size: 18px;">🔄 جاري تحضير الأسئلة...</div>
+                        <div style="color: #666; font-size: 14px; margin-top: 10px;">هذا قد يستغرق بضع ثوانٍ</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار التنقل -->
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" onclick="previousStep()" disabled>السابق</button>
+                <button class="nav-btn next-btn" onclick="nextStep()" id="nextBtn">التالي</button>
+            </div>
+        </div>
+    </div>
+
+      <script src="curriculum_all.js" defer></script>
+<script src="questions_template.js"></script>
+    <script src="tests_complete.js" defer></script>
+</body>
+</html>

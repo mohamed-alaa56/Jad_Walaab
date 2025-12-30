@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاهدة الدرس - منصة حد ولعب</title>
+    <link rel="stylesheet" href="lesson_video.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">حد ولعب</div>
+        </div>
+        
+        <div class="content">
+            <div class="back-btn" onclick="goBackToLessons()" style="margin-bottom: 20px; display: inline-block;">
+                ← رجوع للدروس
+            </div>
+            
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe 
+                        id="youtubePlayer"
+                        width="100%" 
+                        height="500" 
+                        src="" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            
+            <div class="lesson-info">
+                <h2 id="lessonTitle">جاري التحميل...</h2>
+                <div class="lesson-details">
+                    <div class="detail"><strong>الوحدة:</strong> <span id="lessonUnit">-</span></div>
+                    <div class="detail"><strong>المعلم:</strong> <span id="lessonTeacher">-</span></div>
+                    <div class="detail"><strong>الوصف:</strong> <span id="lessonDescription">-</span></div>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button class="action-btn" onclick="markAsWatched()">✅ تمت المشاهدة</button>
+                <button class="action-btn" onclick="goBackToLessons()">📚 العودة للدروس</button>
+                <button class="action-btn" onclick="goHome()">🏠 الرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="lesson_video.js"></script>
+    <script src="points_system.js"></script>
+
+</body>
+</html>

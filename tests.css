@@ -1,0 +1,159 @@
+/* tests.css - تنسيقات الاختبارات */
+@import url('home.css');
+
+/* الخطوات */
+.steps-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0 30px;
+    position: relative;
+}
+
+.step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+    background: #e9ecef;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    font-weight: bold;
+    color: #666;
+}
+
+.step.active .step-number {
+    background: #667eea;
+    color: white;
+}
+
+.step-text {
+    font-size: 12px;
+    color: #666;
+}
+
+.step.active .step-text {
+    color: #667eea;
+    font-weight: bold;
+}
+
+/* محتوى الخطوات */
+.step-content {
+    display: none;
+}
+
+.step-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* تنسيقات المواد */
+.subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.subject-card {
+    background: white;
+    border: 3px solid #e9ecef;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    border-color: #667eea;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.subject-card.selected {
+    border-color: #2ecc71;
+    background: #e8f5e9;
+    transform: scale(1.02);
+}
+
+.subject-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.subject-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+/* تنسيقات الوحدات والدروس */
+.unit-item, .lesson-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.unit-item:hover, .lesson-item:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.unit-item.selected, .lesson-item.selected {
+    border-color: #667eea;
+    background: #667eea;
+    color: white;
+}
+
+/* أزرار */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.nav-btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    min-width: 120px;
+}
+
+.prev-btn {
+    background: #95a5a6;
+    color: white;
+}
+
+.prev-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.next-btn {
+    background: #2ecc71;
+    color: white;
+}
+
+.next-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

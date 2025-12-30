@@ -1,0 +1,472 @@
+/* game1_motion.css - النسخة النهائية بدون نار */
+.game-info {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+}
+
+.game-info h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.lesson-info {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.objective {
+    font-size: 14px;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* مؤشر السرعة في الأعلى */
+.speed-indicator-top {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.indicator-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+    font-size: 18px;
+}
+
+.speed-bar {
+    width: 100%;
+    height: 30px;
+    background: #ecf0f1;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 10px 0;
+    border: 2px solid #bdc3c7;
+    position: relative;
+}
+
+.speed-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #2ecc71, #f1c40f, #e74c3c);
+    border-radius: 13px;
+    transition: width 0.5s ease;
+}
+
+.speed-value {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 5px;
+}
+
+.speed-dots {
+    position: relative;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.speed-dot {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #7f8c8d;
+    font-weight: bold;
+}
+
+.speed-dot::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 8px;
+    background: #95a5a6;
+}
+
+/* منطقة اللعبة */
+.game-area {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* الطريق */
+.road {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(90deg, #2c3e50, #34495e);
+    margin: 20px 0;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #1a252f;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.start, .end {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-weight: bold;
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-radius: 8px;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 2px solid #fff;
+}
+
+.start {
+    left: 15px;
+}
+
+.end {
+    right: 15px;
+}
+
+/* علامات المسافة */
+.distance-mark {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 8px #fff;
+}
+
+/* أرقام المسافة */
+.distance-number {
+    position: absolute;
+    top: 10px;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+/* حاوية السيارة */
+.car-container {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 3s linear;
+    z-index: 3;
+}
+
+.car {
+    font-size: 48px;
+    position: relative;
+    z-index: 10;
+    filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.5));
+    transform: scaleX(-1);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    animation: carIdle 2s infinite alternate;
+}
+
+@keyframes carIdle {
+    0% { transform: scaleX(-1) translateY(0); }
+    100% { transform: scaleX(-1) translateY(-2px); }
+}
+
+/* بطاقات السرعة */
+.speed-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    border: 3px solid #e9ecef;
+    border-radius: 15px;
+    padding: 20px;
+    width: 170px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #667eea;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card.selected {
+    border-color: #2ecc71;
+    background: #d4edda;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
+}
+
+.card-icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.card-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.card-speed {
+    font-size: 12px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* زر التشغيل */
+.play-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 220px;
+    box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3);
+}
+
+.play-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
+}
+
+.play-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* النتيجة */
+.result {
+    text-align: center;
+    padding: 15px;
+    margin: 20px 0;
+    background: white;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    font-size: 16px;
+    font-weight: bold;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.result.success {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    animation: pulseSuccess 1s ease-in-out;
+}
+
+.result.error {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+@keyframes pulseSuccess {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* التفسير العلمي */
+.explanation {
+    padding: 15px;
+    background: #e3f2fd;
+    border-radius: 10px;
+    border-right: 4px solid #2196f3;
+    margin: 20px 0;
+    font-size: 15px;
+    color: #0d47a1;
+    line-height: 1.6;
+}
+
+/* النقاط */
+.points-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 15px;
+    border: 2px solid #ffd700;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.points {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.points span {
+    color: #2ecc71;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* أزرار إضافية */
+.extra-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.action-btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+}
+
+.action-btn:nth-child(1) {
+    background: #95a5a6;
+}
+
+.action-btn:nth-child(1):hover {
+    background: #7f8c8d;
+}
+
+.action-btn:nth-child(2) {
+    background: #2ecc71;
+}
+
+.action-btn:nth-child(2):hover {
+    background: #27ae60;
+}
+
+.hint {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+    .speed-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card {
+        width: 90%;
+        max-width: 300px;
+    }
+    
+    .extra-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .action-btn {
+        width: 90%;
+        max-width: 250px;
+    }
+    
+    .car {
+        font-size: 36px;
+    }
+    
+    .road {
+        height: 100px;
+    }
+    
+    .speed-indicator-top {
+        padding: 12px 15px;
+    }
+    
+    .speed-bar {
+        height: 25px;
+    }
+}
+/* تحسين زر الرجوع */
+.back-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a3d9a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.back-btn:active {
+    transform: translateY(0);
+}
+
+/* إذا كنت تريد زر أكبر وأوضح */
+.header .back-btn {
+    background: linear-gradient(135deg, #5fff82 0%, #19d419 100%);
+    padding: 12px 25px;
+    font-size: 16px;
+    margin-left: 10px;
+}

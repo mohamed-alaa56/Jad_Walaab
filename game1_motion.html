@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة محاكاة الحركة - منصة جد ولعب</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="game1_motion.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            
+            <div class="logo">جد ولعب</div>
+            <div class="page-title">محاكاة الحركة في خط مستقيم</div>
+        </div>
+        
+        <div class="content">
+            <!-- معلومات اللعبة -->
+            <div class="game-info">
+                <h2>🎯 محاكاة الحركة في خط مستقيم</h2>
+                <div class="lesson-info">درس: الحركة في اتجاه واحد</div>
+                <div class="objective">🎯 الهدف: فهم الفرق بين الحركة المنتظمة والمتسارعة عمليًا</div>
+            </div>
+            
+            <!-- مؤشر السرعة فوق الطريق -->
+            <div class="speed-indicator-top">
+                <div class="indicator-title">📊 مؤشر السرعة:</div>
+                <div class="speed-bar">
+                    <div class="speed-fill" id="speedFill"></div>
+                </div>
+                <div class="speed-value" id="speedValue">0 كم/س</div>
+                <div class="speed-dots">
+                   
+                </div>
+            </div>
+            
+            <!-- منطقة اللعبة -->
+            <div class="game-area">
+                <!-- الطريق -->
+                <div class="road" id="road">
+                    <div class="start">بداية</div>
+                    
+                    <!-- السيارة -->
+                    <div class="car-container" id="carContainer">
+                        <div class="car" id="car">🚗</div>
+                    </div>
+                    
+                    <div class="end">نهاية</div>
+                    
+                    <!-- علامات المسافة -->
+                    <div class="distance-mark" style="left: 25%"></div>
+                    <div class="distance-mark" style="left: 50%"></div>
+                    <div class="distance-mark" style="left: 75%"></div>
+                    
+                    <!-- أرقام المسافة -->
+                    <div class="distance-number" style="left: 25%">25%</div>
+                    <div class="distance-number" style="left: 50%">50%</div>
+                    <div class="distance-number" style="left: 75%">75%</div>
+                </div>
+                
+                <!-- بطاقات السرعة -->
+                <div class="speed-cards">
+                    <div class="card" onclick="selectSpeed('constant')" id="constantCard">
+                        <div class="card-icon">🐢</div>
+                        <div class="card-title">سرعة ثابتة</div>
+                        <div class="card-desc">حركة منتظمة</div>
+                        <div class="card-speed">ثابتة طوال الوقت</div>
+                    </div>
+                    
+                    <div class="card" onclick="selectSpeed('increasing')" id="increasingCard">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-title">سرعة متزايدة</div>
+                        <div class="card-desc">حركة متسارعة</div>
+                        <div class="card-speed">تسارع تدريجي</div>
+                    </div>
+                    
+                    <div class="card" onclick="selectSpeed('decreasing')" id="decreasingCard">
+                        <div class="card-icon">🐌</div>
+                        <div class="card-title">سرعة متناقصة</div>
+                        <div class="card-desc">حركة متباطئة</div>
+                        <div class="card-speed">تباطؤ تدريجي</div>
+                    </div>
+                </div>
+                
+                <!-- زر التشغيل -->
+                <button class="play-btn" onclick="startMotion()" id="playBtn">
+                    ▶ تشغيل المحاكاة
+                </button>
+                
+                <!-- النتيجة -->
+                <div class="result" id="result">
+                    اختر سرعة واضغط تشغيل
+                </div>
+                
+                <!-- التفسير العلمي -->
+                <div class="explanation" id="explanation">
+                    💡 في الحركة المنتظمة: يقطع الجسم مسافات متساوية في أزمنة متساوية
+                </div>
+            </div>
+            
+            <!-- أزرار إضافية -->
+            <div class="extra-buttons">
+                <button class="action-btn" onclick="goBack()">← رجوع للألعاب</button>
+                <button class="action-btn" onclick="resetGame()">🔄 إعادة اللعبة</button>
+                <button class="action-btn" onclick="window.location.href='home.html'">🏠 الرئيسية</button>
+            </div>
+            
+           
+
+    <!-- إضافة الصوت -->
+    <audio id="carStartSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-car-engine-starting-1561.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="carAccelerateSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-race-car-engine-revving-1566.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="carSlowSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-car-engine-idling-1564.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="carStopSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-car-engine-rev-1572.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="game1_motion.js"></script>
+    <script src="points_system.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتيجة الاختبار - جد ولعب</title>
+    <link rel="stylesheet" href="test-results.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">جد ولعب</div>
+            <div class="page-title">نتيجة الاختبار</div>
+        </div>
+        
+        <div class="content">
+            <div class="result-card" id="resultCard">
+                <!-- سيتم تعبئته بالجافاسكريبت -->
+            </div>
+            
+            <!-- قسم عرض الإجابات -->
+            <div class="answers-section" id="answersSection" style="display: none;">
+                <div class="section-title">📋 تفاصيل الإجابات</div>
+                <div class="answers-list" id="answersList">
+                    <!-- سيتم تعبئته بالجافاسكريبت -->
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button class="action-btn retry-btn" onclick="retryTest()">🔄 إعادة الاختبار</button>
+                <button class="action-btn home-btn" onclick="goHome()">🏠 الصفحة الرئيسية</button>
+                <button class="action-btn answers-btn" onclick="toggleAnswers()" id="toggleAnswersBtn">📖 عرض الإجابات</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="test-results.js"></script>
+</body>
+</html>

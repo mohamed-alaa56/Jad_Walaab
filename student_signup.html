@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب طالب - جد ولعب</title>
+    <link rel="stylesheet" href="student_signup.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h2 class="title">إنشاء حساب طالب</h2>
+
+    <form id="signupForm">
+
+        <label>اسم الطالب</label>
+        <input type="text" id="signupName" placeholder="اكتب اسمك" required>
+
+        <label>الإيميل</label>
+        <input type="email" id="signupEmail" placeholder="example@gmail.com" required>
+
+        <label>كلمة المرور</label>
+        <input type="password" id="signupPass" placeholder="••••••" required>
+
+        <label>تأكيد كلمة المرور</label>
+        <input type="password" id="signupConfirm" placeholder="••••••" required>
+
+        <button type="submit" class="signup-btn">إنشاء حساب</button>
+
+    </form>
+
+    <p class="note">
+        لديك حساب؟
+        <a href="student_login.html">تسجيل دخول</a>
+    </p>
+
+</div>
+
+<script src="student_signup.js"></script>
+</body>
+</html>
