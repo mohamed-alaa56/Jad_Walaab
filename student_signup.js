@@ -1,4 +1,4 @@
-document.getElementById("signupForm").addEventListener("submit", function(e) {
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
     const name = document.getElementById("signupName").value;
@@ -16,8 +16,10 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
         return;
     }
 
-    let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+    // جلب كل المستخدمين من السحابة
+    let allUsers = await fetchAllUsers();
     
+    // التأكد من عدم تكرار الإيميل
     for (let user of allUsers) {
         if (user.email === email) {
             alert("هذا الحساب موجود بالفعل");
@@ -25,6 +27,7 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
         }
     }
 
+    // إنشاء مستخدم جديد
     const newUser = {
         name: name,
         email: email,
@@ -33,10 +36,14 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
     };
 
     allUsers.push(newUser);
-    localStorage.setItem('allUsers', JSON.stringify(allUsers));
+    
+    // حفظ في السحابة
+    await saveAllUsers(allUsers);
+    
+    // حفظ محلياً للاستخدام
     localStorage.setItem('currentUser', JSON.stringify(newUser));
     localStorage.setItem('userPoints', '0');
 
     alert("تم إنشاء الحساب بنجاح!");
-    window.location.href = "student_login.html";  // الانتقال هنا
+    window.location.href = "student_login.html";
 });

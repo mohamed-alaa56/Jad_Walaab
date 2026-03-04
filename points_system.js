@@ -4,15 +4,30 @@ class PointsSystem {
         this.updateDisplay();
     }
 
-    addPoints(amount, reason) {
+    async addPoints(amount, reason) {
         this.points += amount;
         localStorage.setItem('userPoints', this.points);
         
-        // تحديث النقاط في allUsers
-        this.updateUserPoints();
+        await this.updateUserPointsCloud();
         
         alert(`+${amount} نقطة - ${reason}`);
         this.updateDisplay();
+    }
+
+    async updateUserPointsCloud() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) return;
+
+        const allUsers = await fetchAllUsers();
+        
+        for (let i = 0; i < allUsers.length; i++) {
+            if (allUsers[i].email === currentUser.email) {
+                allUsers[i].points = this.points;
+                break;
+            }
+        }
+        
+        await saveAllUsers(allUsers);
     }
 
     updateUserPoints() {

@@ -1,4 +1,4 @@
-document.getElementById("loginForm").addEventListener("submit", function(e) {
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
     const name = document.getElementById("loginName").value;
@@ -10,7 +10,8 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
         return;
     }
 
-    const allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+    // جلب المستخدمين من السحابة
+    const allUsers = await fetchAllUsers();
     let foundUser = null;
 
     for (let user of allUsers) {
@@ -28,6 +29,5 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
     localStorage.setItem('currentUser', JSON.stringify(foundUser));
     localStorage.setItem('userPoints', foundUser.points.toString());
 
-   
-    window.location.href = "home.html";  // الانتقال هنا
+    window.location.href = "home.html";
 });
