@@ -5,6 +5,7 @@ const ACCESS_KEY = '$2a$10$X9TTeZOVpS4xUEf7o9Q9rOzYHT0bEY87vzlQ7RAUpPbAspNtUqer2
 
 // دالة لجلب كل المستخدمين
 async function fetchAllUsers() {
+    console.log('🔄 جلب من السحابة...');
     try {
         const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
             headers: {
@@ -12,17 +13,21 @@ async function fetchAllUsers() {
             }
         });
         const data = await response.json();
+        console.log('✅ تم الجلب:', data.record.users);
         return data.record.users || [];
     } catch (error) {
-        console.log('خطأ في الجلب، بنستخدم المحلي', error);
-        return JSON.parse(localStorage.getItem('allUsers')) || [];
+        console.log('❌ خطأ في الجلب:', error);
+        const localUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+        console.log('💾 استخدام المحلي:', localUsers);
+        return localUsers;
     }
 }
 
 // دالة لحفظ كل المستخدمين
 async function saveAllUsers(users) {
+    console.log('🔄 حفظ في السحابة:', users);
     try {
-        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,9 +35,11 @@ async function saveAllUsers(users) {
             },
             body: JSON.stringify({ users: users })
         });
+        const data = await response.json();
+        console.log('✅ تم الحفظ:', data);
         return true;
     } catch (error) {
-        console.log('خطأ في الحفظ، بنخزن محلياً', error);
+        console.log('❌ خطأ في الحفظ:', error);
         localStorage.setItem('allUsers', JSON.stringify(users));
         return false;
     }
@@ -40,11 +47,14 @@ async function saveAllUsers(users) {
 
 // تهيئة أول مرة
 async function initCloud() {
+    console.log('🚀 تهيئة السحابة...');
     const users = await fetchAllUsers();
     if (users.length === 0) {
         const localUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
         if (localUsers.length > 0) {
+            console.log('📤 رفع المحلي للسحابة');
             await saveAllUsers(localUsers);
         }
     }
+    console.log('✅ السحابة جاهزة');
 }
