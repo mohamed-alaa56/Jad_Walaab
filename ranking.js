@@ -1,8 +1,10 @@
 let allUsers = [];
 let lastFetchTime = 0;
-const CACHE_TIME = 10000; // 10 ثواني
+const CACHE_TIME = 5000; // 5 ثواني
 
 async function loadRanking(forceRefresh = false) {
+    console.log('🔄 تحميل الترتيب...');
+    
     const now = Date.now();
     
     if (!forceRefresh && now - lastFetchTime < CACHE_TIME && allUsers.length > 0) {
@@ -10,8 +12,11 @@ async function loadRanking(forceRefresh = false) {
         return;
     }
     
+    // جلب البيانات من السحابة
     allUsers = await fetchAllUsers();
     lastFetchTime = now;
+    
+    console.log('📊 المستخدمين:', allUsers);
     
     // ترتيب تنازلي
     allUsers.sort((a, b) => b.points - a.points);
@@ -57,7 +62,7 @@ function displayAllUsers() {
     let sameRankCount = 0;
     
     allUsers.forEach((user, index) => {
-        // حساب الرتبة الصحيحة
+        // حساب الرتبة مع مراعاة التساوي
         let userRank;
         if (user.points === previousPoints) {
             sameRankCount++;
@@ -92,11 +97,12 @@ function goBack() {
     window.location.href = 'home.html';
 }
 
+// تحديث الترتيب كل 10 ثواني
 function startAutoRefresh() {
     loadRanking();
     setInterval(() => {
         loadRanking(true);
-    }, 30000);
+    }, 10000);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
