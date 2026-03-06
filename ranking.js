@@ -5,17 +5,15 @@ const CACHE_TIME = 10000; // 10 ثواني
 async function loadRanking(forceRefresh = false) {
     const now = Date.now();
     
-    // لو جبنا البيانات من أقل من 10 ثواني، نستخدم القديمة
     if (!forceRefresh && now - lastFetchTime < CACHE_TIME && allUsers.length > 0) {
         displayRanking();
         return;
     }
     
-    // جلب البيانات الجديدة
     allUsers = await fetchAllUsers();
     lastFetchTime = now;
     
-    // ترتيب تنازلي حسب النقاط
+    // ترتيب تنازلي
     allUsers.sort((a, b) => b.points - a.points);
     
     displayRanking();
@@ -38,22 +36,9 @@ function displayTopThree() {
         return;
     }
     
-    // عرض المراكز مع حساب الرتبة الصحيحة
-    if (allUsers.length > 0) {
-        firstPlace.innerHTML = `${allUsers[0].name} <br><small>${allUsers[0].points} نقطة</small>`;
-    }
-    
-    if (allUsers.length > 1) {
-        secondPlace.innerHTML = `${allUsers[1].name} <br><small>${allUsers[1].points} نقطة</small>`;
-    } else {
-        secondPlace.textContent = '-';
-    }
-    
-    if (allUsers.length > 2) {
-        thirdPlace.innerHTML = `${allUsers[2].name} <br><small>${allUsers[2].points} نقطة</small>`;
-    } else {
-        thirdPlace.textContent = '-';
-    }
+    firstPlace.innerHTML = allUsers[0] ? `${allUsers[0].name} <br><small>${allUsers[0].points} نقطة</small>` : '-';
+    secondPlace.innerHTML = allUsers[1] ? `${allUsers[1].name} <br><small>${allUsers[1].points} نقطة</small>` : '-';
+    thirdPlace.innerHTML = allUsers[2] ? `${allUsers[2].name} <br><small>${allUsers[2].points} نقطة</small>` : '-';
 }
 
 function displayAllUsers() {
@@ -72,7 +57,7 @@ function displayAllUsers() {
     let sameRankCount = 0;
     
     allUsers.forEach((user, index) => {
-        // حساب الرتبة مع مراعاة التساوي في النقاط
+        // حساب الرتبة الصحيحة
         let userRank;
         if (user.points === previousPoints) {
             sameRankCount++;
@@ -107,7 +92,6 @@ function goBack() {
     window.location.href = 'home.html';
 }
 
-// تحديث الترتيب كل 30 ثانية
 function startAutoRefresh() {
     loadRanking();
     setInterval(() => {
