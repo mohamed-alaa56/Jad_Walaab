@@ -1,7 +1,7 @@
 // cloud_db.js - تخزين سحابي فوري
 
-const BIN_ID = '67c77cf8acd3cb34a8f1ebf7';
-const ACCESS_KEY = '$2a$10$k9UgE6kJycIvMqVvZ1UFku2y3Kak7oSh4NFknhd0NSx00aFJLFcBq';
+const BIN_ID = '69a850b4d0ea881f40ee817c';
+const ACCESS_KEY = '$2a$10$X9TTeZOVpS4xUEf7o9Q9rOzYHT0bEY87vzlQ7RAUpPbAspNtUqer2';
 
 // دالة لجلب كل المستخدمين
 async function fetchAllUsers() {
