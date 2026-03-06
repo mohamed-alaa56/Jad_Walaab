@@ -8,26 +8,19 @@ class PointsSystem {
         this.points += amount;
         localStorage.setItem('userPoints', this.points);
         
+        // تحديث في localStorage
+        this.updateUserPoints();
+        
+        // تحديث في السحابة
         await this.updateUserPointsCloud();
         
         alert(`+${amount} نقطة - ${reason}`);
         this.updateDisplay();
-    }
-
-    async updateUserPointsCloud() {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (!currentUser) return;
-
-        const allUsers = await fetchAllUsers();
         
-        for (let i = 0; i < allUsers.length; i++) {
-            if (allUsers[i].email === currentUser.email) {
-                allUsers[i].points = this.points;
-                break;
-            }
+        // تحديث الترتيب لو الصفحة مفتوحة
+        if (typeof loadRanking === 'function') {
+            loadRanking(true);
         }
-        
-        await saveAllUsers(allUsers);
     }
 
     updateUserPoints() {
@@ -42,6 +35,34 @@ class PointsSystem {
             }
         }
         localStorage.setItem('allUsers', JSON.stringify(allUsers));
+    }
+
+    async updateUserPointsCloud() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) return;
+
+        const allUsers = await fetchAllUsers();
+        
+        let userFound = false;
+        for (let i = 0; i < allUsers.length; i++) {
+            if (allUsers[i].email === currentUser.email) {
+                allUsers[i].points = this.points;
+                userFound = true;
+                break;
+            }
+        }
+        
+        // لو المستخدم مش موجود في السحابة (لسبب ما)، نضيفه
+        if (!userFound) {
+            allUsers.push({
+                name: currentUser.name,
+                email: currentUser.email,
+                password: currentUser.password,
+                points: this.points
+            });
+        }
+        
+        await saveAllUsers(allUsers);
     }
 
     updateDisplay() {
