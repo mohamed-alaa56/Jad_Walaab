@@ -10,7 +10,6 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         return;
     }
 
-    // جلب المستخدمين من السحابة
     const allUsers = await fetchAllUsers();
     let foundUser = null;
 
@@ -28,6 +27,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
     localStorage.setItem('currentUser', JSON.stringify(foundUser));
     localStorage.setItem('userPoints', foundUser.points.toString());
+    localStorage.setItem('allUsers', JSON.stringify(allUsers));
 
     window.location.href = "home.html";
 });
