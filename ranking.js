@@ -1,19 +1,15 @@
 let allUsers = [];
 
 async function loadRanking() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const currentPoints = parseInt(localStorage.getItem('userPoints')) || 0;
+    console.log('🔄 تحميل الترتيب...');
     
     allUsers = await fetchAllUsers();
+    console.log('✅ المستخدمين من السحابة:', allUsers);
     
     // ترتيب المستخدمين من الأعلى نقاطاً للأقل
     allUsers.sort((a, b) => b.points - a.points);
     
     displayRanking();
-}
-
-function getAllRealUsers() {
-    return allUsers;
 }
 
 function displayRanking() {
@@ -33,67 +29,21 @@ function displayTopThree() {
         return;
     }
     
-    // ترتيب المستخدمين (مضمون إنه مرتب)
-    const sorted = [...allUsers].sort((a, b) => b.points - a.points);
-    
-    // المركز الأول (أعلى نقاط)
-    if (sorted.length > 0) {
-        const topPoints = sorted[0].points;
-        const topUsers = sorted.filter(user => user.points === topPoints);
-        
-        if (topUsers.length === 1) {
-            firstPlace.innerHTML = `${topUsers[0].name} <br><small>${topUsers[0].points} نقطة</small>`;
-        } else {
-            const names = topUsers.map(u => u.name).join('، ');
-            firstPlace.innerHTML = `${names} <br><small>${topPoints} نقطة</small>`;
-        }
+    // المركز الأول
+    if (allUsers.length > 0) {
+        firstPlace.innerHTML = `${allUsers[0].name} <br><small>${allUsers[0].points} نقطة</small>`;
     }
     
-    // المركز الثاني (أول واحد بعد اللي في المركز الأول)
-    if (sorted.length > 0) {
-        const topPoints = sorted[0].points;
-        const remaining = sorted.filter(user => user.points < topPoints);
-        
-        if (remaining.length > 0) {
-            const secondPoints = remaining[0].points;
-            const secondUsers = remaining.filter(user => user.points === secondPoints);
-            
-            if (secondUsers.length === 1) {
-                secondPlace.innerHTML = `${secondUsers[0].name} <br><small>${secondUsers[0].points} نقطة</small>`;
-            } else {
-                const names = secondUsers.map(u => u.name).join('، ');
-                secondPlace.innerHTML = `${names} <br><small>${secondPoints} نقطة</small>`;
-            }
-        } else {
-            secondPlace.textContent = '-';
-        }
+    // المركز الثاني
+    if (allUsers.length > 1) {
+        secondPlace.innerHTML = `${allUsers[1].name} <br><small>${allUsers[1].points} نقطة</small>`;
+    } else {
+        secondPlace.textContent = '-';
     }
     
-    // المركز الثالث (أول واحد بعد اللي في المركز الثاني)
-    if (sorted.length > 0) {
-        const topPoints = sorted[0].points;
-        const remaining1 = sorted.filter(user => user.points < topPoints);
-        
-        if (remaining1.length > 0) {
-            const secondPoints = remaining1[0].points;
-            const remaining2 = remaining1.filter(user => user.points < secondPoints);
-            
-            if (remaining2.length > 0) {
-                const thirdPoints = remaining2[0].points;
-                const thirdUsers = remaining2.filter(user => user.points === thirdPoints);
-                
-                if (thirdUsers.length === 1) {
-                    thirdPlace.innerHTML = `${thirdUsers[0].name} <br><small>${thirdUsers[0].points} نقطة</small>`;
-                } else {
-                    const names = thirdUsers.map(u => u.name).join('، ');
-                    thirdPlace.innerHTML = `${names} <br><small>${thirdPoints} نقطة</small>`;
-                }
-            } else {
-                thirdPlace.textContent = '-';
-            }
-        } else {
-            thirdPlace.textContent = '-';
-        }
+    // المركز الثالث
+    if (allUsers.length > 2) {
+        thirdPlace.innerHTML = `${allUsers[2].name} <br><small>${allUsers[2].points} نقطة</small>`;
     } else {
         thirdPlace.textContent = '-';
     }
@@ -110,19 +60,8 @@ function displayAllUsers() {
         return;
     }
     
-    // ترتيب المستخدمين من الأعلى نقاطاً للأقل
-    const sorted = [...allUsers].sort((a, b) => b.points - a.points);
-    
-    let currentRank = 1;
-    let previousPoints = -1;
-    
-    sorted.forEach((user, index) => {
-        // تحديد الرتبة
-        if (user.points !== previousPoints) {
-            currentRank = index + 1;
-            previousPoints = user.points;
-        }
-        
+    // عرض كل المستخدمين بأرقامهم من 1 لـ N
+    allUsers.forEach((user, index) => {
         const userItem = document.createElement('div');
         userItem.className = 'user-item';
         
@@ -132,7 +71,7 @@ function displayAllUsers() {
         
         userItem.innerHTML = `
             <div class="user-info">
-                <div class="user-rank">${currentRank}</div>
+                <div class="user-rank">${index + 1}</div>
                 <div class="user-name">${user.name}</div>
             </div>
             <div class="user-points">${user.points} نقطة</div>
