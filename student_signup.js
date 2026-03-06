@@ -16,10 +16,8 @@ document.getElementById("signupForm").addEventListener("submit", async function(
         return;
     }
 
-    // جلب كل المستخدمين من السحابة
     let allUsers = await fetchAllUsers();
     
-    // التأكد من عدم تكرار الإيميل
     for (let user of allUsers) {
         if (user.email === email) {
             alert("هذا الحساب موجود بالفعل");
@@ -27,7 +25,6 @@ document.getElementById("signupForm").addEventListener("submit", async function(
         }
     }
 
-    // إنشاء مستخدم جديد
     const newUser = {
         name: name,
         email: email,
@@ -36,11 +33,9 @@ document.getElementById("signupForm").addEventListener("submit", async function(
     };
 
     allUsers.push(newUser);
-    
-    // حفظ في السحابة
     await saveAllUsers(allUsers);
     
-    // حفظ محلياً للاستخدام
+    localStorage.setItem('allUsers', JSON.stringify(allUsers));
     localStorage.setItem('currentUser', JSON.stringify(newUser));
     localStorage.setItem('userPoints', '0');
 
