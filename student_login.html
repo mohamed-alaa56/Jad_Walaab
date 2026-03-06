@@ -1,42 +1,37 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>تسجيل دخول الطالب - جد ولعب</title>
-    <link rel="stylesheet" href="student_login.css">
-</head>
-<body>
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-<div class="container">
+    const name = document.getElementById("loginName").value;
+    const email = document.getElementById("loginEmail").value;
+    const pass = document.getElementById("loginPass").value;
 
-    <h2 class="title">تسجيل دخول الطالب</h2>
+    if (!name || !email || !pass) {
+        alert("من فضلك املأ كل البيانات");
+        return;
+    }
 
-    <form id="loginForm">
+    // جلب المستخدمين من السحابة
+    const allUsers = await fetchAllUsers();
+    console.log('👥 المستخدمين في السحابة:', allUsers);
+    
+    let foundUser = null;
 
-        <label>اسم الطالب</label>
-        <input type="text" id="loginName" placeholder="اكتب اسمك" required>
+    for (let user of allUsers) {
+        if (user.email === email && user.password === pass && user.name === name) {
+            foundUser = user;
+            break;
+        }
+    }
 
-        <label>الإيميل</label>
-        <input type="email" id="loginEmail" placeholder="example@gmail.com" required>
+    if (!foundUser) {
+        alert("البيانات غير صحيحة");
+        return;
+    }
 
-        <label>كلمة المرور</label>
-        <input type="password" id="loginPass" placeholder="••••••" required>
+    // حفظ محلياً
+    localStorage.setItem('currentUser', JSON.stringify(foundUser));
+    localStorage.setItem('userPoints', foundUser.points.toString());
+    localStorage.setItem('allUsers', JSON.stringify(allUsers));
 
-        <button type="submit" class="login-btn">تسجيل الدخول</button>
-
-    </form>
-
-    <p class="note">
-        ليس لديك حساب؟
-        <a href="student_signup.html">إنشاء حساب</a>
-    </p>
-
-</div>
-<script src="cloud_db.js"></script>
-<script src="student_login.js"></script>
-    <script>
-        initCloud();
-    </script> 
-</body>
-
-</html>
+    window.location.href = "home.html";
+});
