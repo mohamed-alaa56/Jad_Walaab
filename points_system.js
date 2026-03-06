@@ -52,7 +52,7 @@ class PointsSystem {
             }
         }
         
-        // لو المستخدم مش موجود في السحابة (لسبب ما)، نضيفه
+        // لو المستخدم مش موجود في السحابة، نضيفه
         if (!userFound) {
             allUsers.push({
                 name: currentUser.name,
