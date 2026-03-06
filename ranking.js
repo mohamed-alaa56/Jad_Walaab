@@ -15,7 +15,9 @@ async function loadRanking(forceRefresh = false) {
     allUsers = await fetchAllUsers();
     lastFetchTime = now;
     
+    // ترتيب تنازلي حسب النقاط
     allUsers.sort((a, b) => b.points - a.points);
+    
     displayRanking();
 }
 
@@ -36,9 +38,22 @@ function displayTopThree() {
         return;
     }
     
-    firstPlace.innerHTML = allUsers[0] ? `${allUsers[0].name} <br><small>${allUsers[0].points} نقطة</small>` : '-';
-    secondPlace.innerHTML = allUsers[1] ? `${allUsers[1].name} <br><small>${allUsers[1].points} نقطة</small>` : '-';
-    thirdPlace.innerHTML = allUsers[2] ? `${allUsers[2].name} <br><small>${allUsers[2].points} نقطة</small>` : '-';
+    // عرض المراكز مع حساب الرتبة الصحيحة
+    if (allUsers.length > 0) {
+        firstPlace.innerHTML = `${allUsers[0].name} <br><small>${allUsers[0].points} نقطة</small>`;
+    }
+    
+    if (allUsers.length > 1) {
+        secondPlace.innerHTML = `${allUsers[1].name} <br><small>${allUsers[1].points} نقطة</small>`;
+    } else {
+        secondPlace.textContent = '-';
+    }
+    
+    if (allUsers.length > 2) {
+        thirdPlace.innerHTML = `${allUsers[2].name} <br><small>${allUsers[2].points} نقطة</small>`;
+    } else {
+        thirdPlace.textContent = '-';
+    }
 }
 
 function displayAllUsers() {
@@ -52,7 +67,23 @@ function displayAllUsers() {
         return;
     }
     
+    let currentRank = 1;
+    let previousPoints = -1;
+    let sameRankCount = 0;
+    
     allUsers.forEach((user, index) => {
+        // حساب الرتبة مع مراعاة التساوي في النقاط
+        let userRank;
+        if (user.points === previousPoints) {
+            sameRankCount++;
+            userRank = currentRank;
+        } else {
+            currentRank = currentRank + sameRankCount + 1;
+            sameRankCount = 0;
+            userRank = currentRank;
+            previousPoints = user.points;
+        }
+        
         const userItem = document.createElement('div');
         userItem.className = 'user-item';
         
@@ -62,7 +93,7 @@ function displayAllUsers() {
         
         userItem.innerHTML = `
             <div class="user-info">
-                <div class="user-rank">${index + 1}</div>
+                <div class="user-rank">${userRank}</div>
                 <div class="user-name">${user.name}</div>
             </div>
             <div class="user-points">${user.points} نقطة</div>
@@ -78,9 +109,9 @@ function goBack() {
 
 // تحديث الترتيب كل 30 ثانية
 function startAutoRefresh() {
-    loadRanking(); // أول مرة
+    loadRanking();
     setInterval(() => {
-        loadRanking(true); // تحديث قوي
+        loadRanking(true);
     }, 30000);
 }
 
