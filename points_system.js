@@ -11,7 +11,7 @@ class PointsSystem {
         // تحديث في localStorage
         this.updateUserPoints();
         
-        // تحديث في السحابة
+        // تحديث في السحابة (الأهم)
         await this.updateUserPointsCloud();
         
         alert(`+${amount} نقطة - ${reason}`);
@@ -41,12 +41,13 @@ class PointsSystem {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!currentUser) return;
 
+        // جلب المستخدمين من السحابة
         const allUsers = await fetchAllUsers();
         
         let userFound = false;
         for (let i = 0; i < allUsers.length; i++) {
             if (allUsers[i].email === currentUser.email) {
-                allUsers[i].points = this.points;
+                allUsers[i].points = this.points; // تحديث النقاط
                 userFound = true;
                 break;
             }
@@ -62,7 +63,9 @@ class PointsSystem {
             });
         }
         
+        // حفظ في السحابة
         await saveAllUsers(allUsers);
+        console.log('✅ تم تحديث النقاط في السحابة:', this.points);
     }
 
     updateDisplay() {
