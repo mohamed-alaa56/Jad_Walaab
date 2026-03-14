@@ -37,7 +37,7 @@ class PointsSystem {
             allUsers.push({
                 name: currentUser.name,
                 email: currentUser.email,
-                password: currentUser.password,
+                password: currentUser.password || '',
                 points: this.points
             });
         }
