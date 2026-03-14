@@ -7,10 +7,9 @@ class PointsSystem {
     async addPoints(amount, reason) {
         this.points += amount;
         localStorage.setItem('userPoints', this.points);
-        
-        // تحديث في السحابة
+
         await this.updateUserPointsCloud();
-        
+
         alert(`+${amount} نقطة - ${reason}`);
         this.updateDisplay();
     }
@@ -19,10 +18,8 @@ class PointsSystem {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!currentUser) return;
 
-        // جلب كل المستخدمين من السحابة
         const allUsers = await fetchAllUsers();
-        
-        // البحث عن المستخدم الحالي وتحديث نقاطه
+
         let found = false;
         for (let i = 0; i < allUsers.length; i++) {
             if (allUsers[i].email === currentUser.email) {
@@ -31,8 +28,7 @@ class PointsSystem {
                 break;
             }
         }
-        
-        // لو المستخدم مش موجود في السحابة (مثلاً قديم)، نضيفه
+
         if (!found) {
             allUsers.push({
                 name: currentUser.name,
@@ -41,11 +37,8 @@ class PointsSystem {
                 points: this.points
             });
         }
-        
-        // حفظ في السحابة
+
         await saveAllUsers(allUsers);
-        
-        // تحديث في localStorage
         localStorage.setItem('allUsers', JSON.stringify(allUsers));
     }
 
